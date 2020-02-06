@@ -5,6 +5,8 @@ package com.lu;
  */
 public class Main {
     public static void main(String[] args) {
+        java.util.ArrayList<String> strings = new java.util.ArrayList<>();
+        strings.size();
         ArrayList list = new ArrayList();
         list.add(1);
         list.add(12);
@@ -16,6 +18,8 @@ public class Main {
         list.add(18);
         list.add(19);
         list.add(10);
+        list.add(111);
+
         System.out.println(list.contains(10));
         System.out.println(list.contains(100));
         System.out.println(list.get(3));
