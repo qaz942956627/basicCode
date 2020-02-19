@@ -5,13 +5,12 @@ import java.util.Arrays;
 /**
  * @author 小卢
  */
-public class ArrayList<E> {
+public class ArrayList<E> extends AbstractList<E>{
 
-    private int size;
+
 
     private E[] elements;
 
-    private static final int DEFAULT_SIZE = 10;
     private static final int DEFAULT_CAPACITY = 10;
 
     public ArrayList(){
@@ -21,27 +20,10 @@ public class ArrayList<E> {
         this.elements = (E[]) (capacity < DEFAULT_CAPACITY ? new Object[DEFAULT_CAPACITY] : new Object[capacity]);
     }
 
-    public int size(){
-        return size;
-    }
 
-    public boolean isEmpty(){
-        return size==0;
-    }
 
-    public boolean contains(E element){
-        for (int i = 0; i < size; i++) {
-            if (elements[i] == element) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-    public void add(E element){
-        add(size,element);
-    }
-
+    @Override
     public E get(int index){
         checkRange(index);
         return elements[index];
@@ -49,12 +31,14 @@ public class ArrayList<E> {
 
 
 
+    @Override
     public E set(int index, E element){
         checkRange(index);
         elements[index] = element;
         return element;
     }
 
+    @Override
     public void add(int index,E element){
         rangeCheckForAdd(index);
         ensureCapacity(size+1);
@@ -84,6 +68,7 @@ public class ArrayList<E> {
         elements = Arrays.copyOf(elements,newCapacity);
     }
 
+    @Override
     public E remove(int index){
         checkRange(index);
         E element = elements[index];
@@ -95,6 +80,7 @@ public class ArrayList<E> {
         return  element;
     }
 
+    @Override
     public int indexOf(E element){
         if (element==null){
             for (int i = 0; i < size; i++) {
@@ -110,9 +96,10 @@ public class ArrayList<E> {
             }
         }
 
-        return -1;
+        return ELEMENT_NOT_FOUND;
     }
 
+    @Override
     public void clear(){
 
         //在设置size=0之前 将所有元素的地址值设置为null 解除内存占用
@@ -122,17 +109,4 @@ public class ArrayList<E> {
         size = 0;
     }
 
-    private void rangeCheckForAdd(int index) {
-        if (index < 0 || index > this.size){
-            String msg = "请求下标为:" + index + "最大下标为:" + size;
-            throw new IndexOutOfBoundsException(msg);
-        }
-    }
-
-    private void checkRange(int index) {
-        if (index < 0 || index >= size) {
-            String msg = "请求下标为:" + index + "最大下标为:" + size;
-            throw new IndexOutOfBoundsException(msg);
-        }
-    }
 }
