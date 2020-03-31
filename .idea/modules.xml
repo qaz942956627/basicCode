@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/02-动态数组/02-动态数组.iml" filepath="$PROJECT_DIR$/02-动态数组/02-动态数组.iml" />
       <module fileurl="file://$PROJECT_DIR$/03-链表/03-链表.iml" filepath="$PROJECT_DIR$/03-链表/03-链表.iml" />
       <module fileurl="file://$PROJECT_DIR$/JavaConcurrencyInPractice/JavaConcurrencyInPractice.iml" filepath="$PROJECT_DIR$/JavaConcurrencyInPractice/JavaConcurrencyInPractice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ThinkingInJava/ThinkingInJava.iml" filepath="$PROJECT_DIR$/ThinkingInJava/ThinkingInJava.iml" />
       <module fileurl="file://$PROJECT_DIR$/juc/juc.iml" filepath="$PROJECT_DIR$/juc/juc.iml" />
     </modules>
   </component>
