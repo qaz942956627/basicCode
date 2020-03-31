@@ -1,6 +1,7 @@
 package com.lu.forkjoin;
 
 import java.util.concurrent.RecursiveTask;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author 小卢
@@ -17,7 +18,7 @@ public class ForkJoinDemo extends RecursiveTask<Long> {
     private Long end;
 
     //临界值
-    private Long temp = 100000L;
+    private Long temp = 100L;
 
     public ForkJoinDemo(Long start, Long end) {
         this.start = start;
@@ -29,8 +30,14 @@ public class ForkJoinDemo extends RecursiveTask<Long> {
     @Override
     protected Long compute() {
         if ((end - start) < temp) {
+            System.out.println(Thread.currentThread().getName()+"正在执行");
             Long sum = 0L;
             for (Long i = start; i <= end; i++) {
+                try {
+                    TimeUnit.MILLISECONDS.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 sum += i;
             }
             return sum;
