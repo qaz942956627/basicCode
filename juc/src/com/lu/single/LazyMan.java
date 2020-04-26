@@ -1,5 +1,7 @@
 package com.lu.single;
 
+import java.lang.reflect.Constructor;
+
 /**
  * 懒汉式单例
  * @author 小卢
@@ -34,4 +36,21 @@ public class LazyMan {
         }
         return lazyMan;
     }
+
+    public static void main(String[] args) throws Exception {
+        //通过单例模式获取一个实例
+        LazyMan instance1 = LazyMan.getInstance();
+        //通过反射获取构造器
+        Constructor<LazyMan> lazyManConstructor = LazyMan.class.getDeclaredConstructor(null);
+        //破坏私有
+        lazyManConstructor.setAccessible(true);
+        //创建一个实例
+        LazyMan instance2 = lazyManConstructor.newInstance();
+        //打印结果  com.lu.single.LazyMan@1b6d3586
+        System.out.println(instance1);
+        // 打印结果  com.lu.single.LazyMan@4554617c
+        System.out.println(instance2);
+    }
 }
+
+
