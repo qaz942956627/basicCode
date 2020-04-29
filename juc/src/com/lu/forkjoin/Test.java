@@ -1,7 +1,5 @@
 package com.lu.forkjoin;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
@@ -13,7 +11,7 @@ import java.util.stream.LongStream;
 public class Test {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        test2();
+        test3();
     }
 
     public static void test1() {
@@ -28,15 +26,13 @@ public class Test {
 
     //使用ForkJoin
     public static void test2() throws ExecutionException, InterruptedException {
-        LocalDateTime start = LocalDateTime.now();
-        System.out.println("开始时间:"+start);
+        long start = System.currentTimeMillis();
         ForkJoinPool forkJoinPool = new ForkJoinPool();
-        ForkJoinDemo forkJoinDemo = new ForkJoinDemo(1L, 1_0000L);
+        ForkJoinDemo forkJoinDemo = new ForkJoinDemo(1L, 10_0000_0000L);
         ForkJoinTask<Long> submit = forkJoinPool.submit(forkJoinDemo);
         Long sum = submit.get();
-        LocalDateTime end = LocalDateTime.now();
-        System.out.println("结束时间:"+end);
-        System.out.println("sum="+sum+"时间"+(Duration.between(start,end).toMillis()));
+        long end = System.currentTimeMillis();
+        System.out.println("sum="+sum+"时间"+(end-start));
     }
 
     public static void test3() {
