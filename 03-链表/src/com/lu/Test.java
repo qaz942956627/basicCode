@@ -4,9 +4,17 @@ import java.math.BigInteger;
 
 public class Test {
     public static void main(String[] args) {
-        sub sub = new sub();
-        sub.doSomething();
-
+        //sub sub = new sub();
+        //sub.doSomething();
+        List<Integer> list = new LinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        while (!list.isEmpty()){
+            System.out.println(list.remove(0));
+        }
     }
 }
 
