@@ -1,27 +1,35 @@
 package com.lu;
 
+import com.lu.list.ArrayList;
+
 /**
  * @author 小卢
  */
 public class Stack<E> {
 
+    private ArrayList<E> list = new ArrayList<>();
+
+    public void clear() {
+        list.clear();
+    }
+
     public int size() {
-        return 0;
+        return list.size();
     }
 
     public boolean isEmpty() {
-        return false;
+        return list.isEmpty();
     }
 
     public void push(E element) {
-
+        list.add(element);
     }
 
     public E pop() {
-        return null;
+        return list.remove(list.size() - 1);
     }
 
     public E top() {
-        return null;
+        return list.get(list.size() - 1);
     }
 }

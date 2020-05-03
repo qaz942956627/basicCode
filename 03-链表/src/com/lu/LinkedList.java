@@ -69,7 +69,7 @@ public class LinkedList<E> extends AbstractList<E> {
         Node<E> next = node.next;
 
         if (prev == null) {
-            first = node;
+            first = next;
         } else {
             prev.next = next;
         }
