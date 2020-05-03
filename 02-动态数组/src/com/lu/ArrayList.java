@@ -11,7 +11,6 @@ public class ArrayList<E> {
 
     private E[] elements;
 
-    private static final int DEFAULT_SIZE = 10;
     private static final int DEFAULT_CAPACITY = 10;
 
     public ArrayList(){

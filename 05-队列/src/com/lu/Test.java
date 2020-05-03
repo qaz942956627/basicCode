@@ -1,20 +1,62 @@
 package com.lu;
 
+import com.lu.circle.CircleDeque;
+import com.lu.circle.CircleQueue;
+
 /**
  * @author 小卢
  */
 public class Test {
 
     public static void main(String[] args) {
-        /*Queue<Integer> queue = new Queue<>();
-        queue.enQueue(1);
-        queue.enQueue(2);
-        queue.enQueue(3);
-        queue.enQueue(4);
+        circleDequeTest();
+    }
 
+    private static void circleDequeTest() {
+        CircleDeque<Integer> queue = new CircleDeque<>();
+        for (int i = 0; i < 10; i++) {
+            queue.enQueueFront(i + 1);
+            queue.enQueueRear(i+100);
+        }
+//        for (int i = 0; i < 5; i++) {
+//            queue.deQueue();
+//        }
+//        for (int i = 15; i < 20; i++) {
+//            queue.enQueue(i);
+//        }
+        System.out.println(queue);
+        while (!queue.isEmpty()) {
+            System.out.println(queue.deQueueFront());
+        }
+    }
+
+    private static void circleQueueTest() {
+        CircleQueue<Integer> queue = new CircleQueue<>();
+        for (int i = 0; i < 10; i++) {
+            queue.enQueue(i);
+        }
+        for (int i = 0; i < 5; i++) {
+            queue.deQueue();
+        }
+        for (int i = 15; i < 20; i++) {
+            queue.enQueue(i);
+        }
+        System.out.println(queue);
         while (!queue.isEmpty()) {
             System.out.println(queue.deQueue());
-        }*/
+        }
+    }
+
+    private static void queueTest() {
+    /*Queue<Integer> queue = new Queue<>();
+    queue.enQueue(1);
+    queue.enQueue(2);
+    queue.enQueue(3);
+    queue.enQueue(4);
+
+    while (!queue.isEmpty()) {
+        System.out.println(queue.deQueue());
+    }*/
 
         Deque<Integer> deque = new Deque<>();
         /*deque.enQueueFront(1);
