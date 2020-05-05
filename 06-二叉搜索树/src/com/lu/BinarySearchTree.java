@@ -77,29 +77,28 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         //添加第一个节点
         if (root == null) {
             root = new Node<>(element, null);
-        } else {
-            //添加不是第一个节点
-            Node<E> parent = root;
-            Node<E> node = root;
-            int cmp = compareTo(node.element, element);
-            while (node != null) {
-
-                parent = node;
-                if (cmp > 0) {
-                    node = node.left;
-                } else if (cmp < 0) {
-                    node = node.right;
-                } else {
-                    node.element = element;
-                    return;
-                }
-            }
-            Node<E> newNode = new Node<>(element, parent);
+        }
+        //添加不是第一个节点
+        Node<E> parent = root;
+        Node<E> node = root;
+        int cmp = 0;
+        while (node != null) {
+            cmp = compareTo(node.element, element);
+            parent = node;
             if (cmp > 0) {
-                parent.left = newNode;
+                node = node.left;
             } else if (cmp < 0) {
-                parent.right = newNode;
+                node = node.right;
+            } else {
+                node.element = element;
+                return;
             }
+        }
+        Node<E> newNode = new Node<>(element, parent);
+        if (cmp > 0) {
+            parent.left = newNode;
+        } else if (cmp < 0) {
+            parent.right = newNode;
         }
         size++;
     }
