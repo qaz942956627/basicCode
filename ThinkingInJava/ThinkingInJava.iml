@@ -7,5 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="org.projectlombok:lombok:1.18.8" level="application" />
+    <orderEntry type="library" name="JUnit5.4" level="application" />
   </component>
 </module>
