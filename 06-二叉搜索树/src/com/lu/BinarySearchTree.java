@@ -78,7 +78,40 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     }
 
     public int height() {
-        return height(root);
+        return heightLevel(root);
+    }
+
+    /**
+     * 每当一层遍历完 队列的size就是下一层元素的个数
+     * @param node
+     * @return
+     */
+    private int heightLevel(Node<E> node) {
+
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(node);
+        // 记录每一层有几个节点
+        int levelSize = 1;
+        int height = 0;
+        while (!queue.isEmpty()) {
+            // 进来先弹出节点然后offer左右节点
+            node = queue.poll();
+            // 每处理完一个节点就把当前层待处理节点数减一
+            levelSize--;
+
+            if (node.left != null) {
+                queue.offer(node.left);
+            }
+            if (node.right != null) {
+                queue.offer(node.right);
+            }
+            // 当本层要处理的数量为0,证明成功处理完一层 高度+1 levelSize设置为queue.size(下一层所有元素的数量)
+            if (levelSize == 0) {
+                height++;
+                levelSize = queue.size();
+            }
+        }
+        return height;
     }
 
     private int height(Node<E> node) {
