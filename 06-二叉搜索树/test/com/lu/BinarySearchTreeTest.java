@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -44,15 +45,22 @@ class BinarySearchTreeTest {
 
     @Test
     void print() {
-        Integer[] data = {7, 4, 9, 2, 5, 8, 11, 3};
+        Integer[] data = {7, 4, 9, 2, 5, 8, 11, 3, 1, 12};
         for (int i = 0; i < data.length; i++) {
             binarySearchTree.add(data[i]);
         }
         BinaryTrees.println(binarySearchTree);
-        //binarySearchTree.preOrderTraversal();
-        //binarySearchTree.inOrderTraversal();
-        //binarySearchTree.postOrderTraversal();
-        binarySearchTree.levelOrderTraversal();
+        BinarySearchTree.Visitor visitor = (element) -> {
+            System.out.print("_" + element);
+        };
+        binarySearchTree.preOrderTraversal(visitor);
+        System.out.println();
+        binarySearchTree.inOrderTraversal(visitor);
+        System.out.println();
+        binarySearchTree.postOrderTraversal(visitor);
+        System.out.println();
+        //binarySearchTree.levelOrderTraversal();
+        binarySearchTree.levelOrderTraversal(visitor);
     }
 
     @Test

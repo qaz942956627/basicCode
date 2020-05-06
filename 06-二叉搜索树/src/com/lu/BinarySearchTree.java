@@ -109,20 +109,67 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         preOrderTraversal(root);
     }
 
+    public void preOrderTraversal(Visitor visitor) {
+        preOrderTraversal(root, visitor);
+    }
+
     public void inOrderTraversal() {
         inOrderTraversal(root);
+    }
+
+    public void inOrderTraversal(Visitor visitor) {
+        inOrderTraversal(root, visitor);
     }
 
     public void postOrderTraversal() {
         postOrderTraversal(root);
     }
 
-    public void levelOrderTraversal() {
+    public void postOrderTraversal(Visitor visitor) {
+        postOrderTraversal(root, visitor);
+    }
+
+    interface Visitor<E> {
+        /**
+         * 使用者可以自定义遍历输出规则
+         *
+         * @param element
+         */
+        void visitor(E element);
+    }
+
+    public void levelOrderTraversal(Visitor<E> visitor) {
+        //利用队列特性,先进先出
+        levelOrderTraversal(root, visitor);
+    }
+
+    private void levelOrderTraversal(Node<E> node, Visitor<E> visitor) {
         //利用队列特性,先进先出
         Queue<Node<E>> queue = new LinkedList<>();
         queue.offer(root);
         while (queue.peek() != null) {
-            Node<E> node = queue.poll();
+            node = queue.poll();
+            visitor.visitor(node.element);
+            if (node.left != null) {
+                queue.offer(node.left);
+            }
+            if (node.right != null) {
+                queue.offer(node.right);
+            }
+        }
+    }
+
+    public void levelOrderTraversal() {
+        //利用队列特性,先进先出
+        levelOrderTraversal(root);
+    }
+
+    private void levelOrderTraversal(Node<E> node) {
+        //利用队列特性,先进先出
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(root);
+        while (queue.peek() != null) {
+            node = queue.poll();
             System.out.println(node.element);
             if (node.left != null) {
                 queue.offer(node.left);
@@ -142,6 +189,15 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         System.out.println(node.element);
     }
 
+    private void postOrderTraversal(Node<E> node, Visitor visitor) {
+        if (node == null) {
+            return;
+        }
+        postOrderTraversal(node.left, visitor);
+        postOrderTraversal(node.right, visitor);
+        visitor.visitor(node.element);
+    }
+
     private void inOrderTraversal(Node<E> node) {
         if (node == null) {
             return;
@@ -149,6 +205,15 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         inOrderTraversal(node.left);
         System.out.println(node.element);
         inOrderTraversal(node.right);
+    }
+
+    private void inOrderTraversal(Node<E> node, Visitor visitor) {
+        if (node == null) {
+            return;
+        }
+        inOrderTraversal(node.left, visitor);
+        visitor.visitor(node.element);
+        inOrderTraversal(node.right, visitor);
     }
 
     private void preOrderTraversal(Node<E> node) {
@@ -159,8 +224,19 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         preOrderTraversal(node.left);
         preOrderTraversal(node.right);
     }
+
+    private void preOrderTraversal(Node<E> node, Visitor visitor) {
+        if (node == null) {
+            return;
+        }
+        visitor.visitor(node.element);
+        preOrderTraversal(node.left, visitor);
+        preOrderTraversal(node.right, visitor);
+    }
+
     /**
      * 两个元素相比较e1大于e2返回一个正数 小于返回一个负数 等于返回0;
+     *
      * @param e1
      * @param e2
      * @return
@@ -168,10 +244,10 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     private int compareTo(E e1, E e2) {
         //如果有人通过有参构造传入了比较器,那么优先使用比较器
         if (comparator != null) {
-            return comparator.compare(e1,e2);
+            return comparator.compare(e1, e2);
         }
         //如果直接通过无参构造创建的element,那么二叉树要求传入的对象必须实现comparable接口来做到可比较
-        return ((Comparable<E>)e1).compareTo(e2);
+        return ((Comparable<E>) e1).compareTo(e2);
     }
 
     private void elementNotNullCheck(E element) {
