@@ -20,6 +20,10 @@ class BinarySearchTreeTest {
     void init() {
         //binarySearchTree = new BinarySearchTree<>(Person::compareTo);
         binarySearchTree = new BinarySearchTree<>();
+        Integer[] data = {7, 4, 9, 2, 5, 8, 11, 3, 1, 12, 13};
+        for (int i = 0; i < data.length; i++) {
+            binarySearchTree.add(data[i]);
+        }
     }
 
     @Test
@@ -46,11 +50,13 @@ class BinarySearchTreeTest {
     }
 
     @Test
+    void height() {
+        BinaryTrees.println(binarySearchTree);
+        System.out.println(binarySearchTree.height());
+    }
+
+    @Test
     void print() {
-        Integer[] data = {7, 4, 9, 2, 5, 8, 11, 3, 1, 12};
-        for (int i = 0; i < data.length; i++) {
-            binarySearchTree.add(data[i]);
-        }
         BinaryTrees.println(binarySearchTree);
         Predicate<Integer> predicate = (element) -> {
             System.out.print("_" + element);

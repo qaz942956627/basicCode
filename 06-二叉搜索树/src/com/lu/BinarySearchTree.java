@@ -77,6 +77,17 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 
     }
 
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node<E> node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1 + Math.max(height(node.left), height(node.right));
+    }
+
     public void add(E element) {
         elementNotNullCheck(element);
         //添加第一个节点
