@@ -29,6 +29,9 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         this.comparator = comparator;
     }
 
+    public boolean isLeaf(Node<E> node) {
+        return node.left == null && node.right == null;
+    }
     @Override
     public Object root() {
         return root;
@@ -75,6 +78,37 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 
     public void clear() {
 
+    }
+
+    public boolean isComplete() {
+        return isComplete(root);
+    }
+
+    private boolean isComplete(Node<E> node) {
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(node);
+        // 记录是否出现叶子节点或者只有左子节点的节点
+        boolean isLeaf = false;
+        while (!queue.isEmpty()) {
+            node = queue.poll();
+            // 如果出现一个节点的右子节点不为null并且佐子结点为null的情况就说明这个树不是完全二叉树
+
+            if (isLeaf && !isLeaf(node)) {
+                return false;
+            }
+
+            if (node.left != null) {
+                queue.offer(node.left);
+            } else if (node.right != null) {
+                return false;
+            }
+            if (node.right != null) {
+                queue.offer(node.right);
+            } else {
+                isLeaf = true;
+            }
+        }
+        return true;
     }
 
     public int height() {

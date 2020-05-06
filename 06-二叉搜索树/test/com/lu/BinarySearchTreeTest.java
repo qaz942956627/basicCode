@@ -27,6 +27,12 @@ class BinarySearchTreeTest {
     }
 
     @Test
+    void complete() {
+        BinaryTrees.println(binarySearchTree);
+        System.out.println(binarySearchTree.isComplete());
+    }
+
+    @Test
     void size() {
     }
 
