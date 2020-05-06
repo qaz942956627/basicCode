@@ -5,6 +5,9 @@ import com.lu.printer.BinaryTreeInfo;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * @author 小卢
@@ -129,13 +132,28 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         postOrderTraversal(root, visitor);
     }
 
-    interface Visitor<E> {
+    /**
+     * 用户自定义遍历规则
+     * 要求每次开始使用之前必须要把stop重置为false
+     * @param <E>
+     */
+    public static class Visitor<E> {
+        boolean stop;
+
+        private final Predicate<E> predicate;
+
+        public Visitor(Predicate<E> predicate) {
+            this.predicate =  predicate;
+        }
+
         /**
          * 使用者可以自定义遍历输出规则
-         *
          * @param element
          */
-        void visitor(E element);
+        public boolean visitor(E element) {
+            return this.predicate.test(element);
+        }
+
     }
 
     public void levelOrderTraversal(Visitor<E> visitor) {
@@ -189,13 +207,16 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         System.out.println(node.element);
     }
 
-    private void postOrderTraversal(Node<E> node, Visitor visitor) {
-        if (node == null) {
+    private void postOrderTraversal(Node<E> node, Visitor<E> visitor) {
+        if (node == null || visitor.stop) {
             return;
         }
         postOrderTraversal(node.left, visitor);
         postOrderTraversal(node.right, visitor);
-        visitor.visitor(node.element);
+        if (visitor.stop) {
+            return;
+        }
+        visitor.stop = visitor.visitor(node.element);
     }
 
     private void inOrderTraversal(Node<E> node) {
@@ -207,12 +228,15 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         inOrderTraversal(node.right);
     }
 
-    private void inOrderTraversal(Node<E> node, Visitor visitor) {
-        if (node == null) {
+    private void inOrderTraversal(Node<E> node, Visitor<E> visitor) {
+        if (node == null || visitor.stop) {
             return;
         }
         inOrderTraversal(node.left, visitor);
-        visitor.visitor(node.element);
+        if (visitor.stop) {
+            return;
+        }
+        visitor.stop = visitor.visitor(node.element);
         inOrderTraversal(node.right, visitor);
     }
 
@@ -225,11 +249,11 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         preOrderTraversal(node.right);
     }
 
-    private void preOrderTraversal(Node<E> node, Visitor visitor) {
-        if (node == null) {
+    private void preOrderTraversal(Node<E> node, Visitor<E> visitor) {
+        if (node == null||visitor.stop) {
             return;
         }
-        visitor.visitor(node.element);
+        visitor.stop = visitor.visitor(node.element);
         preOrderTraversal(node.left, visitor);
         preOrderTraversal(node.right, visitor);
     }

@@ -4,9 +4,11 @@ import com.lu.printer.BinaryTrees;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -50,17 +52,26 @@ class BinarySearchTreeTest {
             binarySearchTree.add(data[i]);
         }
         BinaryTrees.println(binarySearchTree);
-        BinarySearchTree.Visitor visitor = (element) -> {
+        Predicate<Integer> predicate = (element) -> {
             System.out.print("_" + element);
+            if (element == 3) {
+                return true;
+            }
+            return false;
         };
+        BinarySearchTree.Visitor<Integer> visitor = new BinarySearchTree.Visitor<>(predicate);
         binarySearchTree.preOrderTraversal(visitor);
-        System.out.println();
+        System.out.println("前序遍历完成");
+        //visitor = new BinarySearchTree.Visitor<>(predicate);
+        visitor.stop = false;
         binarySearchTree.inOrderTraversal(visitor);
-        System.out.println();
+        System.out.println("中序遍历完成");
+        //visitor = new BinarySearchTree.Visitor<>(predicate);
+        visitor.stop = false;
         binarySearchTree.postOrderTraversal(visitor);
-        System.out.println();
+        System.out.println("后续遍历完成");
         //binarySearchTree.levelOrderTraversal();
-        binarySearchTree.levelOrderTraversal(visitor);
+        //binarySearchTree.levelOrderTraversal(visitor);
     }
 
     @Test
