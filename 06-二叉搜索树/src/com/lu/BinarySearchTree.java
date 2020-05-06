@@ -3,6 +3,8 @@ package com.lu;
 import com.lu.printer.BinaryTreeInfo;
 
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * @author 小卢
@@ -103,6 +105,60 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         size++;
     }
 
+    public void preOrderTraversal() {
+        preOrderTraversal(root);
+    }
+
+    public void inOrderTraversal() {
+        inOrderTraversal(root);
+    }
+
+    public void postOrderTraversal() {
+        postOrderTraversal(root);
+    }
+
+    public void levelOrderTraversal() {
+        //利用队列特性,先进先出
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(root);
+        while (queue.peek() != null) {
+            Node<E> node = queue.poll();
+            System.out.println(node.element);
+            if (node.left != null) {
+                queue.offer(node.left);
+            }
+            if (node.right != null) {
+                queue.offer(node.right);
+            }
+        }
+    }
+
+    private void postOrderTraversal(Node<E> node) {
+        if (node == null) {
+            return;
+        }
+        postOrderTraversal(node.left);
+        postOrderTraversal(node.right);
+        System.out.println(node.element);
+    }
+
+    private void inOrderTraversal(Node<E> node) {
+        if (node == null) {
+            return;
+        }
+        inOrderTraversal(node.left);
+        System.out.println(node.element);
+        inOrderTraversal(node.right);
+    }
+
+    private void preOrderTraversal(Node<E> node) {
+        if (node == null) {
+            return;
+        }
+        System.out.println(node.element);
+        preOrderTraversal(node.left);
+        preOrderTraversal(node.right);
+    }
     /**
      * 两个元素相比较e1大于e2返回一个正数 小于返回一个负数 等于返回0;
      * @param e1

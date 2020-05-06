@@ -4,6 +4,9 @@ import com.lu.printer.BinaryTrees;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BinarySearchTreeTest {
@@ -46,6 +49,16 @@ class BinarySearchTreeTest {
             binarySearchTree.add(data[i]);
         }
         BinaryTrees.println(binarySearchTree);
+        //binarySearchTree.preOrderTraversal();
+        //binarySearchTree.inOrderTraversal();
+        //binarySearchTree.postOrderTraversal();
+        binarySearchTree.levelOrderTraversal();
+    }
+
+    @Test
+    void preOrderTraversal() {
+        Queue<Integer> queue = new LinkedList<>();
+        System.out.println(queue.peek());
     }
 
     @Test
