@@ -80,6 +80,42 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 
     }
 
+    /**
+     * 获取一个节点的前驱节点
+     * @param node
+     * @return
+     */
+    private Node<E> predecessor(Node<E> node) {
+        //如果传进来的是null,则必然没有什么前驱节点
+        if (node == null) {
+            return null;
+        }
+        //如果左子节点不为空那么前驱节点一定在做子节点中
+        if (node.left != null) {
+            //前驱节点一定在左子树中
+            node = node.left;
+            while (node != null) {
+                //终止条件右子节点为空那么此时node就是前驱节点
+                if (node.right != null) {
+                    return node;
+                }
+                node = node.right;
+            }
+        }
+        //如果满足左子节点为空但是父节点不为空,那么前驱节点一定是在一直向右找的过程中第一次向左的那个父节点
+        if (node.parent!=null) {
+            Node<E> parent = node.parent;
+            while (parent.right != node) {
+                //一直向右找到父节点
+                node = parent;
+            }
+            //第一次向左寻找父节点,这个父节点就是前驱节点
+            return parent;
+        }
+        //剩下的就是没有左子节点,也没有父节点,只有右子节点的那么它本身就是最小的一个没有前驱节点
+        return null;
+    }
+
     public boolean isComplete() {
         return isComplete(root);
     }
