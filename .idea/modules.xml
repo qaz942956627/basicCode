@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/JavaConcurrencyInPractice/JavaConcurrencyInPractice.iml" filepath="$PROJECT_DIR$/JavaConcurrencyInPractice/JavaConcurrencyInPractice.iml" />
       <module fileurl="file://$PROJECT_DIR$/ThinkingInJava/ThinkingInJava.iml" filepath="$PROJECT_DIR$/ThinkingInJava/ThinkingInJava.iml" />
       <module fileurl="file://$PROJECT_DIR$/juc/juc.iml" filepath="$PROJECT_DIR$/juc/juc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/算法-01-排序/算法-01-排序.iml" filepath="$PROJECT_DIR$/算法-01-排序/算法-01-排序.iml" />
     </modules>
   </component>
 </project>
