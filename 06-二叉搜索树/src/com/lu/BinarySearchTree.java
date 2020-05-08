@@ -90,30 +90,47 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         if (node == null) {
             return null;
         }
-        //如果左子节点不为空那么前驱节点一定在做子节点中
-        if (node.left != null) {
-            //前驱节点一定在左子树中
-            node = node.left;
-            while (node != null) {
-                //终止条件右子节点为空那么此时node就是前驱节点
-                if (node.right != null) {
-                    return node;
-                }
-                node = node.right;
+        //如果左子节点不为空那么前驱节点一定在左子节点中
+        //前驱节点一定在左子树中
+        node = node.left;
+        if (node != null) {
+            //终止条件右子节点为空那么此时node就是前驱节点
+            while (node.right != null) {
+                node = node.left;
             }
+            return node;
         }
         //如果满足左子节点为空但是父节点不为空,那么前驱节点一定是在一直向右找的过程中第一次向左的那个父节点
-        if (node.parent!=null) {
-            Node<E> parent = node.parent;
-            while (parent.right != node) {
-                //一直向右找到父节点
-                node = parent;
-            }
-            //第一次向左寻找父节点,这个父节点就是前驱节点
-            return parent;
+        Node<E> parent = node.parent;
+        while (parent != null && parent.left == node) {
+            //一直向右找到父节点
+            node = parent;
         }
-        //剩下的就是没有左子节点,也没有父节点,只有右子节点的那么它本身就是最小的一个没有前驱节点
-        return null;
+        //第一次向左寻找父节点,这个父节点就是前驱节点,剩下的就是没有左子节点,也没有父节点,只有右子节点的那么它本身就是最小的一个没有前驱节点
+        return parent;
+    }
+
+    /**
+     * 获取一个节点的后继节点
+     * @param node
+     * @return
+     */
+    private Node<E> successor(Node<E> node) {
+        if (node == null) {
+            return null;
+        }
+        node = node.right;
+        if (node != null) {
+            while (node.left != null) {
+                node = node.right;
+            }
+            return node;
+        }
+        Node<E> parent = node.parent;
+        while (parent != null && parent.right == node) {
+            node = parent;
+        }
+        return parent;
     }
 
     public boolean isComplete() {
