@@ -20,12 +20,23 @@ class BinarySearchTreeTest {
     void init() {
         //binarySearchTree = new BinarySearchTree<>(Person::compareTo);
         binarySearchTree = new BinarySearchTree<>();
-        Integer[] data = {7, 4, 9, 2, 5, 8, 11, 3, 1, 12, 13};
+        //Integer[] data = {7, 4, 9, 2, 5, 8, 11, 3, 1, 12, 13};
+        Integer[] data = {329, 238, 245, 80, 390, 409, 244, 374, 95, 412, 44, 310, 262, 293, 126, 137, 214, 228, 38, 436, 358, 463, 489, 417, 166, 111, 461, 61, 452, 30, 394, 464, 132, 426, 269, 265, 314, 472, 309, 26, 480, 367, 284, 232, 316, 300, 383};
         for (int i = 0; i < data.length; i++) {
             binarySearchTree.add(data[i]);
         }
     }
 
+    @Test
+    void remove() {
+        BinaryTrees.println(binarySearchTree);
+        binarySearchTree.remove(436);
+        BinaryTrees.println(binarySearchTree);
+    }
+
+    @Test
+    void contains() {
+    }
     @Test
     void complete() {
         BinaryTrees.println(binarySearchTree);
@@ -92,11 +103,4 @@ class BinarySearchTreeTest {
         System.out.println(queue.peek());
     }
 
-    @Test
-    void remove() {
-    }
-
-    @Test
-    void contains() {
-    }
 }

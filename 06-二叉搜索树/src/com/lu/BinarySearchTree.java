@@ -67,7 +67,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
             return left == null && right == null;
         }
 
-        public boolean hasTwoChild() {
+        public boolean hasTwoChildren() {
             return left != null && right != null;
         }
     }
@@ -82,16 +82,69 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     }
 
     public void remove(E element) {
-        Node<E> node = node(element);
+        remove(node(element));
+    }
+
+    private void remove(Node<E> node) {
         if (node == null) {
             return;
         }
+        size--;
         //度为2的节点
-        if (node.hasTwoChild()) {
+        if (node.hasTwoChildren()) {
             //找到这个节点的前驱节点或者后继节点
             Node<E> predecessor = predecessor(node);
+            //用前驱节点的值替换当前节点的值
             node.element = predecessor.element;
+            //删除前驱节点
+            node = predecessor;
         }
+
+        // 删除node节点（node的度必然是1或者0）
+        Node<E> parent = node.parent;
+        Node<E> children = node.left != null ? node.left : node.right;
+        //如果父节点和子节点都为null那么证明这棵树只有root节点
+        if (parent == null && children == null) {
+            root = null;
+        }else if (parent != null && children == null) {
+            // 如果删除节点是子节点的情况 度为0 需要让parent的执行设置为null
+            //如果被删除节点是parent的左子节点
+            if (parent.left == node) {
+                parent.left = null;
+            }
+            //如果被删除节点是parent的右子节点
+            if (parent.right == node) {
+                parent.right = null;
+            }
+        } else if (parent != null){
+            //剩下的就是删除的节点度为1的时候
+
+            //如果被删除节点是parent的左子节点
+            if (parent.left == node) {
+                //如果被删除节点的左子节点有值
+                if (node.left != null) {
+                    parent.left = node.left;
+                }
+                //如果被删除的节点右子节点有值
+                if (node.right != null) {
+                    parent.right = node.right;
+                }
+            }
+            //如果被删除节点是parent的右子节点
+            if (parent.right == node) {
+                //如果被删除节点的左子节点有值
+                if (node.left != null) {
+                    parent.left = node.left;
+                }
+                //如果被删除的节点右子节点有值
+                if (node.right != null) {
+                    parent.right = node.right;
+                }
+            }
+        }
+
+
+
     }
 
     public boolean contains(E element) {
@@ -137,12 +190,12 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
             return null;
         }
         //如果左子节点不为空那么前驱节点一定在左子节点中
-        //前驱节点一定在左子树中
-        node = node.left;
-        if (node != null) {
+        if (node.left != null) {
+            //前驱节点一定在左子树中
+            node = node.left;
             //终止条件右子节点为空那么此时node就是前驱节点
             while (node.right != null) {
-                node = node.left;
+                node = node.right;
             }
             return node;
         }
@@ -165,10 +218,10 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         if (node == null) {
             return null;
         }
-        node = node.right;
-        if (node != null) {
+        if (node.right != null) {
+            node = node.right;
             while (node.left != null) {
-                node = node.right;
+                node = node.left;
             }
             return node;
         }
