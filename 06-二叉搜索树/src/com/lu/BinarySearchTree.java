@@ -29,9 +29,6 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         this.comparator = comparator;
     }
 
-    public boolean isLeaf(Node<E> node) {
-        return node.left == null && node.right == null;
-    }
     @Override
     public Object root() {
         return root;
@@ -55,7 +52,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         return node1.element;
     }
 
-    private static class Node<E> {
+    public static class Node<E> {
         private E element;
         private Node<E> parent;
         private Node<E> left;
@@ -64,6 +61,14 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         public Node(E element, Node<E> parent) {
             this.element = element;
             this.parent = parent;
+        }
+
+        public boolean isLeaf() {
+            return left == null && right == null;
+        }
+
+        public boolean hasTwoChild() {
+            return left != null && right != null;
         }
     }
 
@@ -76,8 +81,49 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         return size == 0;
     }
 
+    public void remove(E element) {
+        Node<E> node = node(element);
+        if (node == null) {
+            return;
+        }
+        //度为2的节点
+        if (node.hasTwoChild()) {
+            //找到这个节点的前驱节点或者后继节点
+            Node<E> predecessor = predecessor(node);
+            node.element = predecessor.element;
+        }
+    }
+
+    public boolean contains(E element) {
+        return false;
+    }
+
     public void clear() {
 
+    }
+
+    private Node<E> node(E element) {
+        //不允许为null直接返回null
+        if (element == null) {
+            return null;
+        }
+        //首先和root进行比较
+        Node<E> node = this.root;
+        while (node != null) {
+            int cmp = compareTo(element, node.element);
+            //如果传入元素和当前node的元素相等那么返回这个node
+            if (cmp == 0) {
+                return node;
+            } else if (cmp > 0) {
+                //如果element比当前元素大那么往右找更大的值
+                node = node.right;
+            } else {
+                //剩下的就是element笔当前元素小的 ,那么需要往左找元素值更小的node
+                node = node.left;
+            }
+        }
+        //所有都找完了没有相等的 那么返回null 没找到
+        return null;
     }
 
     /**
@@ -137,6 +183,11 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         return isComplete(root);
     }
 
+    /**
+     * 判断一棵树是否是完全二叉树
+     * @param node
+     * @return
+     */
     private boolean isComplete(Node<E> node) {
         Queue<Node<E>> queue = new LinkedList<>();
         queue.offer(node);
@@ -146,7 +197,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
             node = queue.poll();
             // 如果出现一个节点的右子节点不为null并且佐子结点为null的情况就说明这个树不是完全二叉树
 
-            if (isLeaf && !isLeaf(node)) {
+            if (isLeaf && !node.isLeaf()) {
                 return false;
             }
 
@@ -164,6 +215,10 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         return true;
     }
 
+    /**
+     * 获取树的高度
+     * @return
+     */
     public int height() {
         return heightLevel(root);
     }
@@ -239,18 +294,30 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         size++;
     }
 
+    /**
+     * 层序遍历
+     */
     public void preOrderTraversal() {
         preOrderTraversal(root);
     }
-
+    /**
+     * 先序遍历
+     */
     public void preOrderTraversal(Visitor visitor) {
         preOrderTraversal(root, visitor);
     }
 
+    /**
+     * 中序遍历
+     */
     public void inOrderTraversal() {
         inOrderTraversal(root);
     }
 
+    /**
+     * 中序遍历
+     * @param visitor
+     */
     public void inOrderTraversal(Visitor visitor) {
         inOrderTraversal(root, visitor);
     }
@@ -409,14 +476,6 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         if (element == null) {
             throw new IllegalArgumentException("element must be not null!");
         }
-    }
-
-    public void remove(E element) {
-
-    }
-
-    public boolean contains(E element) {
-        return false;
     }
 
 }
