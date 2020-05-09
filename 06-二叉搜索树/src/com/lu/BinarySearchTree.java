@@ -135,11 +135,11 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     }
 
     public boolean contains(E element) {
-        return false;
+        return node(element) != null;
     }
 
     public void clear() {
-
+        root = null;
     }
 
     private Node<E> node(E element) {
