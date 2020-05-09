@@ -109,11 +109,13 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
          * node     儿子
          * child    孙子
          */
-        if (children != null) { // node是度为1的节点
+        // node是度为1的节点
+        if (children != null) {
             // 孙子认爷当爹
             children.parent = parent;
             // 更改parent的left、right的指向
-            if (parent == null) { // node是度为1的节点并且是根节点
+            if (parent == null) {
+                // node是度为1的节点并且是根节点
                 root = children;
             } else if (node == parent.left) {
                 parent.left = children;
