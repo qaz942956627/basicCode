@@ -103,48 +103,35 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         // 删除node节点（node的度必然是1或者0）
         Node<E> parent = node.parent;
         Node<E> children = node.left != null ? node.left : node.right;
-        //如果父节点和子节点都为null那么证明这棵树只有root节点
-        if (parent == null && children == null) {
+
+        /**
+         * parent   爷爷
+         * node     儿子
+         * child    孙子
+         */
+        if (children != null) { // node是度为1的节点
+            // 孙子认爷当爹
+            children.parent = parent;
+            // 更改parent的left、right的指向
+            if (parent == null) { // node是度为1的节点并且是根节点
+                root = children;
+            } else if (node == parent.left) {
+                parent.left = children;
+            } else { // node == node.parent.right
+                parent.right = children;
+            }
+        } else if (parent == null) {
+            //如果父节点和子节点都为null那么证明这棵树只有root节点
             root = null;
-        }else if (parent != null && children == null) {
-            // 如果删除节点是子节点的情况 度为0 需要让parent的执行设置为null
+        } else {
             //如果被删除节点是parent的左子节点
             if (parent.left == node) {
                 parent.left = null;
-            }
-            //如果被删除节点是parent的右子节点
-            if (parent.right == node) {
+            } else {
+                //如果不是左节点那么一定是右节点
                 parent.right = null;
             }
-        } else if (parent != null){
-            //剩下的就是删除的节点度为1的时候
-
-            //如果被删除节点是parent的左子节点
-            if (parent.left == node) {
-                //如果被删除节点的左子节点有值
-                if (node.left != null) {
-                    parent.left = node.left;
-                }
-                //如果被删除的节点右子节点有值
-                if (node.right != null) {
-                    parent.right = node.right;
-                }
-            }
-            //如果被删除节点是parent的右子节点
-            if (parent.right == node) {
-                //如果被删除节点的左子节点有值
-                if (node.left != null) {
-                    parent.left = node.left;
-                }
-                //如果被删除的节点右子节点有值
-                if (node.right != null) {
-                    parent.right = node.right;
-                }
-            }
         }
-
-
-
     }
 
     public boolean contains(E element) {
