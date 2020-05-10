@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/06-二叉搜索树/06-二叉搜索树.iml" filepath="$PROJECT_DIR$/06-二叉搜索树/06-二叉搜索树.iml" />
       <module fileurl="file://$PROJECT_DIR$/06-二叉搜索树2/06-二叉搜索树2.iml" filepath="$PROJECT_DIR$/06-二叉搜索树2/06-二叉搜索树2.iml" />
       <module fileurl="file://$PROJECT_DIR$/07-AVL树/07-AVL树.iml" filepath="$PROJECT_DIR$/07-AVL树/07-AVL树.iml" />
+      <module fileurl="file://$PROJECT_DIR$/12-堆/12-堆.iml" filepath="$PROJECT_DIR$/12-堆/12-堆.iml" />
       <module fileurl="file://$PROJECT_DIR$/JavaConcurrencyInPractice/JavaConcurrencyInPractice.iml" filepath="$PROJECT_DIR$/JavaConcurrencyInPractice/JavaConcurrencyInPractice.iml" />
       <module fileurl="file://$PROJECT_DIR$/ThinkingInJava/ThinkingInJava.iml" filepath="$PROJECT_DIR$/ThinkingInJava/ThinkingInJava.iml" />
       <module fileurl="file://$PROJECT_DIR$/juc/juc.iml" filepath="$PROJECT_DIR$/juc/juc.iml" />
