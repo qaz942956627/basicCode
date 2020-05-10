@@ -1,6 +1,9 @@
 package com.lu;
 
 
+import com.lu.tools.Integers;
+import com.lu.tools.Times;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -27,4 +30,20 @@ class BubbleSortTest {
         System.out.println();
         //System.out.println(nums.length);
     }
+
+    @Test
+    void bubbleSort2() {
+        //Integer[] array = Integers.tailAscOrder(1, 10000, 2000);
+        Integer[] array = Integers.ascOrder(1, 10000);
+
+        //Integers.println(array);
+        Integer[] array1 = Integers.copy(array);
+        Integer[] array2 = Integers.copy(array);
+
+        Times.test("bubbleSort",()->BubbleSort.bubbleSort(array));
+        Times.test("bubbleSort1",()->BubbleSort.bubbleSort2(array1));
+        Times.test("bubbleSort2",()->BubbleSort.bubbleSort3(array2));
+
+    }
+
 }
