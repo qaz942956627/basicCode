@@ -101,7 +101,7 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
         elementNotNullCheck(element);
         //添加第一个节点
         if (root == null) {
-            root = new Node<>(element, null);
+            root = createNode(element,null);
         } else {
             //添加不是第一个节点
             Node<E> parent = root;
@@ -119,14 +119,27 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
                     return;
                 }
             }
-            Node<E> newNode = new Node<>(element, parent);
+            Node<E> newNode = createNode(element, parent);
             if (cmp > 0) {
                 parent.left = newNode;
             } else if (cmp < 0) {
                 parent.right = newNode;
             }
+            addAfter(newNode);
         }
         size++;
+    }
+
+    protected Node<E> createNode(E element, Node<E> node) {
+        return new Node<>(element, node);
+    }
+
+    /**
+     * 平衡二叉树添加元素之后平衡的方法
+     * @param node
+     */
+    protected void addAfter(Node<E> node) {
+
     }
 
     public boolean contains(E element) {
