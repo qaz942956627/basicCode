@@ -1,14 +1,10 @@
 package com.lu;
 
 
+import com.lu.sort.BubbleSort;
 import com.lu.tools.Integers;
 import com.lu.tools.Times;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 
 class BubbleSortTest {
 
