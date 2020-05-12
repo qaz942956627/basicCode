@@ -1,13 +1,23 @@
 package com.lu;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@Data
+/**
+ * @author 小卢
+ */
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student {
-    private int score;
-    private String name;
+@ToString
+public class Student implements Comparable<Student>{
+
+    public int score;
+    public int age;
+
+    @Override
+    public int compareTo(Student o) {
+        return age - o.age;
+    }
+
 }

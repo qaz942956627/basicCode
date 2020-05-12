@@ -1,16 +1,13 @@
 package com.lu;
 
 
+import com.lu.sort.BubbleSort;
 import com.lu.tools.Integers;
 import com.lu.tools.Times;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 
 class BubbleSortTest {
 
@@ -39,6 +36,7 @@ class BubbleSortTest {
 
     @Test
     void bubbleSort() {
+        Integer[] nums = new Integer[]{4, 6, 7, 54, 21, 354, 321,  2, 33,500};
         //Integer[] nums = new Integer[]{7,5,4,8,20,13,22,23,24};
         //Arrays.sort(nums, Collections.reverseOrder());
         for (int i = 0; i < nums.length; i++) {
@@ -69,7 +67,5 @@ class BubbleSortTest {
         Times.test("bubbleSort2",()->BubbleSort.bubbleSort3(array2));
 
     }
-
-
 
 }

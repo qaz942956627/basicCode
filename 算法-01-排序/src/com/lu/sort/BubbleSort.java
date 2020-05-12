@@ -1,4 +1,4 @@
-package com.lu;
+package com.lu.sort;
 
 /**
  * 冒泡排序
