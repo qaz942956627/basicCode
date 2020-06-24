@@ -41,7 +41,7 @@ public class AvlTree<E> extends BinarySearchTree<E> {
     }
 
     private boolean isBalance(Node<E> node) {
-        return isBalance(node);
+        return Math.abs(((AvlNode<E>) node).balanceFactor()) <= 1;
     }
 
     /**
@@ -49,12 +49,13 @@ public class AvlTree<E> extends BinarySearchTree<E> {
      * @param node
      */
     private void updateHeight(Node<E> node) {
-        updateHeight(node);
+        AvlNode<E> avlNode = (AvlNode<E>) node;
+        avlNode.updateHeight();
     }
 
     @Override
     protected Node<E> createNode(E element, Node<E> node) {
-        return super.createNode(element, node);
+        return new AvlNode<>(element, node);
     }
 
     private static class AvlNode<E> extends Node<E> {

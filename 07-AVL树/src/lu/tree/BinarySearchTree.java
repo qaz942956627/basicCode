@@ -130,6 +130,7 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
         size++;
     }
 
+    @Override
     protected Node<E> createNode(E element, Node<E> node) {
         return new Node<>(element, node);
     }

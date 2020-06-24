@@ -72,6 +72,9 @@ public class BinaryTree<E> implements BinaryTreeInfo {
         root = null;
     }
 
+    protected Node<E> createNode(E element, Node<E> node) {
+        return new Node<>(element, node);
+    }
 
     /**
      * 获取一个节点的前驱节点
