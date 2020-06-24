@@ -67,33 +67,48 @@ public class AvlTree<E> extends BinarySearchTree<E> {
         }
     }
 
-    private void rotateLeft(Node<E> node) {
-        Node<E> parent = node.right;
-
-
-
-        node.right = parent.left;
-        parent.left = node;
-        if (node.isLeftChild()) {
-            node.parent.left = parent;
-        } else if (node.isRightChild()) {
-            node.parent.right = parent;
-        } else {
-        }
-            parent.parent = node.parent;
-        node.parent = parent;
+    private void rotateLeft(Node<E> grand) {
+        Node<E> parent = grand.right;
+        Node<E> child = parent.left;
+        grand.right = child;
+        parent.left = grand;
+        afterRotate(grand, parent, child);
     }
 
-    private void rotateRight(Node<E> node) {
-        Node<E> parent = node.left;
-        node.left = parent.right;
-        parent.right = node;
-        parent.parent = node.parent;
-        node.parent = parent;
+    private void afterRotate(Node<E> grand, Node<E> parent, Node<E> child) {
+        // 让parent成为子树的根节点
+        parent.parent = grand.parent;
+        if (grand.isLeftChild()) {
+            grand.parent.left = parent;
+        } else if (grand.isRightChild()) {
+            grand.parent.right = parent;
+        } else {
+            // else 被旋转的节点是根节点
+            root = parent;
+        }
+        //更新child的parent
+        if (child != null) {
+            child.parent = grand;
+        }
+        //更新grand的parent
+        grand.parent = parent;
+
+        //更新高度
+        updateHeight(grand);
+        updateHeight(parent);
+    }
+
+    private void rotateRight(Node<E> grand) {
+        Node<E> parent = grand.left;
+        Node<E> child = parent.right;
+        grand.left = child;
+        parent.right = grand;
+        afterRotate(grand, parent, child);
     }
 
     private boolean isBalance(Node<E> node) {
-        return isBalance(node);
+        AvlNode<E> avlNode = (AvlNode<E>) node;
+        return avlNode.isBalance();
     }
 
     /**
@@ -102,7 +117,7 @@ public class AvlTree<E> extends BinarySearchTree<E> {
      */
     private void updateHeight(Node<E> node) {
         AvlNode<E> avlNode = (AvlNode<E>) node;
-        avlNode.updateHeight();
+        avlNode.height = avlNode.updateHeight();
     }
 
     @Override
