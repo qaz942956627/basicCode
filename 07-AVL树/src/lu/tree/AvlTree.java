@@ -28,6 +28,8 @@ public class AvlTree<E> extends BinarySearchTree<E> {
             } else {
                 //如果是不平衡的 那么根据情况旋转 恢复平衡
                 reBalance(node);
+                //进入else则找到第一个不平衡的节点,把这个节点恢复平衡整棵树恢复平衡
+                break;
             }
 
         }
@@ -35,13 +37,63 @@ public class AvlTree<E> extends BinarySearchTree<E> {
 
     /**
      * 恢复平衡
-     * @param node
+     * @param grand 高度最低的那个失衡的节点
      */
-    private void reBalance(Node<E> node) {
+    private void reBalance(Node<E> grand) {
+        Node<E> parent = ((AvlNode<E>) grand).tallerChild();
+        Node<E> node = ((AvlNode<E>) parent).tallerChild();
+        if (parent.isLeftChild()) {
+            // L
+            if (node.isLeftChild()) {
+                // LL
+                rotateRight(grand);
+            } else {
+                // LR
+                // 先把parent进行一次左旋转,变成LL的情况
+                rotateLeft(parent);
+                rotateRight(grand);
+            }
+        } else {
+            // R
+            if (node.isLeftChild()) {
+                // RL
+                // 先把parent进行一次右旋转,变成RR的情况
+                rotateRight(parent);
+                rotateLeft(grand);
+            } else {
+                // RR
+                rotateLeft(grand);
+            }
+        }
+    }
+
+    private void rotateLeft(Node<E> node) {
+        Node<E> parent = node.right;
+
+
+
+        node.right = parent.left;
+        parent.left = node;
+        if (node.isLeftChild()) {
+            node.parent.left = parent;
+        } else if (node.isRightChild()) {
+            node.parent.right = parent;
+        } else {
+        }
+            parent.parent = node.parent;
+        node.parent = parent;
+    }
+
+    private void rotateRight(Node<E> node) {
+        Node<E> parent = node.left;
+        node.left = parent.right;
+        parent.right = node;
+        parent.parent = node.parent;
+        node.parent = parent;
     }
 
     private boolean isBalance(Node<E> node) {
-        return Math.abs(((AvlNode<E>) node).balanceFactor()) <= 1;
+        return isBalance(node);
     }
 
     /**
@@ -82,5 +134,20 @@ public class AvlTree<E> extends BinarySearchTree<E> {
             int rightBalance = right == null ? 0 : ((AvlNode<E>) right).height;
             return Math.max(leftBalance,rightBalance) + 1;
         }
+
+        public Node<E> tallerChild() {
+            int leftHeight = left == null ? 0 : ((AvlNode<E>) left).height;
+            int rightHeight = right == null ? 0 : ((AvlNode<E>) right).height;
+            //返回左右子树高度更高的子树
+            if (leftHeight > rightHeight) {
+                return left;
+            }
+            if (leftHeight < rightHeight) {
+                return right;
+            }
+            //如果左右字数高度相同 自己是父节点的左子节点就返回左,是右边就返回右
+            return isLeftChild() ? left : right;
+        }
+
     }
 }

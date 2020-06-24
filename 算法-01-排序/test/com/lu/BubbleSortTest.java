@@ -4,9 +4,35 @@ package com.lu;
 import com.lu.sort.BubbleSort;
 import com.lu.tools.Integers;
 import com.lu.tools.Times;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BubbleSortTest {
+
+    Integer[] nums;
+
+    @BeforeEach
+    void before() {
+        nums = new Integer[]{4, 6, 7, 54, 21, 354, 321,  2, 33,500};
+    }
+
+    @Test
+    void selectionSortTest() {
+        for (int i = 0; i < nums.length; i++) {
+            System.out.print(nums[i]+"->");
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        Integer[] integers = SelectionSort.selectionSort1(nums);
+        for (int i = 0; i < integers.length; i++) {
+            System.out.print(integers[i]+"->");
+        }
+        System.out.println();
+        //System.out.println(nums.length);
+    }
 
     @Test
     void bubbleSort() {
