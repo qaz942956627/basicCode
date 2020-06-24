@@ -25,7 +25,7 @@ class AvlTreeTest {
 
     @Test
     void addAfter() {
-        BinaryTrees.print(avl);
+        BinaryTrees.println(avl);
     }
 
 }

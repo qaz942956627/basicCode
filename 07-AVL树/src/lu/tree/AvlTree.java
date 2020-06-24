@@ -164,5 +164,16 @@ public class AvlTree<E> extends BinarySearchTree<E> {
             return isLeftChild() ? left : right;
         }
 
+        @Override
+        public String toString() {
+            String parentString = "null";
+            if (parent != null) {
+                parentString = parent.element.toString();
+            }
+            return element + "_P(" + parentString + ")_h(" + height +")";
+        }
+
     }
+
+
 }
