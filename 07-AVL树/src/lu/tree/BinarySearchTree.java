@@ -37,6 +37,8 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
             node = predecessor;
         }
 
+
+
         // 删除node节点（node的度必然是1或者0）
         Node<E> parent = node.parent;
         Node<E> children = node.left != null ? node.left : node.right;
@@ -59,9 +61,12 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
             } else { // node == node.parent.right
                 parent.right = children;
             }
+            //真正被删除的节点
+            removeAfter(node);
         } else if (parent == null) {
             //如果父节点和子节点都为null那么证明这棵树只有root节点
             root = null;
+            removeAfter(node);
         } else {
             //如果被删除节点是parent的左子节点
             if (parent.left == node) {
@@ -70,7 +75,16 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
                 //如果不是左节点那么一定是右节点
                 parent.right = null;
             }
+            removeAfter(node);
         }
+    }
+
+    /**
+     * 删除node之后的调整
+     * @param node 被删除的节点
+     */
+    protected void removeAfter(Node<E> node) {
+
     }
 
     private Node<E> node(E element) {
