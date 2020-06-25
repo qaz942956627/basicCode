@@ -18,7 +18,7 @@ public class InsertionSort1<E extends Comparable<E>> extends Sort<E> {
             // 备份当前插入元素 , 右移过程中会被覆盖
             E currElement = array[currIndex];
             // 如果当前元素的值小于前一个元素的值, 前一个元素右移
-            while (cmp(currElement, array[currIndex - 1]) < 0) {
+            while (cmpElements(currElement, array[currIndex - 1]) < 0) {
                 // 右移操作
                 array[currIndex] = array[currIndex - 1];
                 currIndex--;

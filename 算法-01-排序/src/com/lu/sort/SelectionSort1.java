@@ -1,9 +1,9 @@
-package com.lu;
+package com.lu.sort;
 
 /**
  * @author 小卢
  */
-public class SelectionSort {
+public class SelectionSort1 {
 
     public static Integer[] selectionSort(Integer[] array) {
         int size = array.length;

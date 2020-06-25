@@ -19,7 +19,7 @@ public class InsertionSort<E extends Comparable<E>> extends Sort<E> {
             int right = i;
             int left = i -1;
             // 左边元素大于右边元素,交换一次位置
-            while (cmp(array[left],array[right]) > 0) {
+            while (cmpElements(array[left],array[right]) > 0) {
                 swap(left, right);
                 //如果左索引已经是0了那就不需要继续比较了
                 if (left == 0) {

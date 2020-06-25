@@ -50,11 +50,11 @@ public abstract class Sort<E extends Comparable<E>> implements Comparable<Sort<E
 		return array[i1].compareTo(array[i2]);
 	}
 	
-	protected int cmp(E v1, E v2) {
+	protected int cmpElements(E v1, E v2) {
 		cmpCount++;
 		return v1.compareTo(v2);
 	}
-	
+
 	protected void swap(int i1, int i2) {
 		swapCount++;
 		E tmp = array[i1];

@@ -1,15 +1,14 @@
 package com.lu;
 
 
-import com.lu.sort.BubbleSort;
+import com.lu.sort.BubbleSort1;
+import com.lu.sort.SelectionSort1;
 import com.lu.tools.Integers;
 import com.lu.tools.Times;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class BubbleSortTest {
+class BubbleSort1Test {
 
     Integer[] nums;
 
@@ -26,7 +25,7 @@ class BubbleSortTest {
         System.out.println();
         System.out.println();
         System.out.println();
-        Integer[] integers = SelectionSort.selectionSort1(nums);
+        Integer[] integers = SelectionSort1.selectionSort1(nums);
         for (int i = 0; i < integers.length; i++) {
             System.out.print(integers[i]+"->");
         }
@@ -45,7 +44,7 @@ class BubbleSortTest {
         System.out.println();
         System.out.println();
         System.out.println();
-        Integer[] integers = new BubbleSort().bubbleSort3(nums);
+        Integer[] integers = new BubbleSort1().bubbleSort3(nums);
         for (int i = 0; i < integers.length; i++) {
             System.out.print(integers[i]+"->");
         }
@@ -62,9 +61,9 @@ class BubbleSortTest {
         Integer[] array1 = Integers.copy(array);
         Integer[] array2 = Integers.copy(array);
 
-        Times.test("bubbleSort",()->BubbleSort.bubbleSort(array));
-        Times.test("bubbleSort1",()->BubbleSort.bubbleSort2(array1));
-        Times.test("bubbleSort2",()->BubbleSort.bubbleSort3(array2));
+        Times.test("bubbleSort",()-> BubbleSort1.bubbleSort(array));
+        Times.test("bubbleSort1",()-> BubbleSort1.bubbleSort2(array1));
+        Times.test("bubbleSort2",()-> BubbleSort1.bubbleSort3(array2));
 
     }
 
