@@ -116,6 +116,7 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
         //添加第一个节点
         if (root == null) {
             root = createNode(element,null);
+            addAfter(root);
         } else {
             //添加不是第一个节点
             Node<E> parent = root;
