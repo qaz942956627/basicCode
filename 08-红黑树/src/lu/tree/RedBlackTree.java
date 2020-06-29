@@ -19,8 +19,31 @@ public class RedBlackTree<E> extends BalanceBinarySearchTree<E> {
     }
 
     @Override
-    protected void removeAfter(Node<E> node) {
-        super.removeAfter(node);
+    protected void removeAfter(Node<E> node, Node<E> replacement) {
+        // 如果删除的节点是红色
+        if (isRed(node)) {
+            return;
+        }
+
+        // 用以取代node的子节点是红色
+        if (isRed(replacement)) {
+            black(replacement);
+            return;
+        }
+
+        Node<E> parent = node.parent;
+        // 删除的是根节点
+        if (parent == null) {
+            return;
+        }
+
+        // 删除的是黑色叶子节点
+        if (node.isLeftChild()) {
+            //如果是左子节点
+
+        } else if (node.isRightChild()) {
+
+        }
     }
 
     @Override
