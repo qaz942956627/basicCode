@@ -8,6 +8,10 @@ import com.lu.tools.Times;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+import java.time.LocalTime;
+import java.util.Random;
+
 class BubbleSort1Test {
 
     Integer[] nums;
@@ -65,6 +69,28 @@ class BubbleSort1Test {
         Times.test("bubbleSort1",()-> BubbleSort1.bubbleSort2(array1));
         Times.test("bubbleSort2",()-> BubbleSort1.bubbleSort3(array2));
 
+    }
+
+    @Test
+    void test() {
+        LocalTime start = LocalTime.now();
+        Random random = new Random();
+        for (int i = 0; i < 100000000; i++) {
+            int i1 = random.nextInt() / 2;
+        }
+        LocalTime end = LocalTime.now();
+        System.out.println(Duration.between(start, end).toMillis());
+    }
+
+    @Test
+    void test2() {
+        LocalTime start = LocalTime.now();
+        Random random = new Random();
+        for (int i = 0; i < 100000000; i++) {
+            int i1 = random.nextInt() >> 1;
+        }
+        LocalTime end = LocalTime.now();
+        System.out.println(Duration.between(start, end).toMillis());
     }
 
 }
