@@ -39,14 +39,15 @@ public class ImportDemo extends RecursiveAction {
                     e.printStackTrace();
                 }
 
-                //System.out.println(Thread.currentThread().getName()+ LocalDateTime.now()+"   ->  "+l);
-                System.out.println(l);
+
+                System.out.println(Thread.currentThread().getName()+ LocalDateTime.now()+"   ->  "+l);
+                /*System.out.println(l);
                 if (l % 100 == 0) {
                     Integer integer = list.get(0);
                     Integer integer1 = list.get(list.size() - 1);
                     System.out.println(integer+"------------->"+integer1);
                     throw new RuntimeException();
-                }
+                }*/
             });
         } else {
             // ForkJoin

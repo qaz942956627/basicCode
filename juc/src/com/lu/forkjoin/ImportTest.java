@@ -16,7 +16,18 @@ import java.util.stream.LongStream;
 public class ImportTest {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        test2();
+
+        new Thread(()->{
+            try {
+                test2();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+        System.out.println(Thread.currentThread().getName()+"分配完了");
+        Thread.sleep(1000000000);
     }
 
 
@@ -27,12 +38,11 @@ public class ImportTest {
             integers.add(i);
         }
         LocalDateTime start = LocalDateTime.now();
-        ForkJoinPool forkJoinPool = new ForkJoinPool();
+        ForkJoinPool forkJoinPool = TestForkJoinPool.getInstance();
         ImportDemo forkJoinDemo = new ImportDemo(integers);
         forkJoinPool.submit(forkJoinDemo);
         //阻塞当前线程知道任务都执行完
         boolean b = forkJoinPool.awaitTermination(2000000000, TimeUnit.SECONDS);
-
 
         LocalDateTime end = LocalDateTime.now();
         System.out.println("结束时间:" + end);
