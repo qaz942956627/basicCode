@@ -10,8 +10,6 @@ public class InsertionSort<E extends Comparable<E>> extends Sort<E> {
     @Override
     protected void sort() {
 
-        printArray(-1);
-
         int size = array.length;
         //插入排序第一个元素不需要拍直接插入就行 i从1开始
         for (int i = 1; i < size; i++) {
@@ -29,7 +27,6 @@ public class InsertionSort<E extends Comparable<E>> extends Sort<E> {
                 left--;
                 right--;
             }
-            printArray(i);
         }
     }
 }

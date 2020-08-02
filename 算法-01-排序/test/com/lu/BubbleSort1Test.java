@@ -1,7 +1,7 @@
 package com.lu;
 
 
-import com.lu.sort.BubbleSort1;
+import com.lu.sort.BubbleSort1111;
 import com.lu.sort.SelectionSort1;
 import com.lu.tools.Integers;
 import com.lu.tools.Times;
@@ -48,7 +48,7 @@ class BubbleSort1Test {
         System.out.println();
         System.out.println();
         System.out.println();
-        Integer[] integers = new BubbleSort1().bubbleSort3(nums);
+        Integer[] integers = new BubbleSort1111().bubbleSort3(nums);
         for (int i = 0; i < integers.length; i++) {
             System.out.print(integers[i]+"->");
         }
@@ -65,9 +65,9 @@ class BubbleSort1Test {
         Integer[] array1 = Integers.copy(array);
         Integer[] array2 = Integers.copy(array);
 
-        Times.test("bubbleSort",()-> BubbleSort1.bubbleSort(array));
-        Times.test("bubbleSort1",()-> BubbleSort1.bubbleSort2(array1));
-        Times.test("bubbleSort2",()-> BubbleSort1.bubbleSort3(array2));
+        Times.test("bubbleSort",()-> BubbleSort1111.bubbleSort(array));
+        Times.test("bubbleSort1",()-> BubbleSort1111.bubbleSort2(array1));
+        Times.test("bubbleSort2",()-> BubbleSort1111.bubbleSort3(array2));
 
     }
 

@@ -9,8 +9,6 @@ public class InsertionSort1<E extends Comparable<E>> extends Sort<E> {
     @Override
     protected void sort() {
 
-        printArray(-1);
-
         //插入排序第一个元素不需要拍直接插入就行 i从1开始
         for (int i = 1; i < array.length; i++) {
             // 记录一下当前插入元素下标,where循环中会修改值

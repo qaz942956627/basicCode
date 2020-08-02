@@ -11,21 +11,30 @@ import java.util.Arrays;
 
 class HeapSortTest {
 
-    private Sort<Integer> sort;
-    private Sort<Integer> sort1;
-    private Sort<Integer> sort2;
-    Integer[] array;
-    Integer[] array1;
-    Integer[] array2;
+    private Integer[] array;
 
     @BeforeEach
     void before() {
-        array = array = Integers.random(10000, 1, 20000);
+        array = Integers.random(10000, 1, 10000);
     }
 
     @Test
     void sort() {
-        testSorts(array, new HeapSort<>(), new SelectionSort<>(), new BubbleSort<>());
+        testSorts(array,
+				new BubbleSort1(),		// 冒泡排序
+				new BubbleSort2(),		// 冒泡排序-优化1
+				new BubbleSort(),		// 冒泡排序-优化2
+				new SelectionSort(), 	// 选择排序
+                new HeapSort(),  		// 堆排序
+				new InsertionSort1(),   // 插入排序
+				new InsertionSort(), 	// 插入排序-挪动优化
+                new InsertionSort3(),	// 插入排序-二分查找优化
+                new MergeSort() 		// 归并排序
+//                new QuickSort(),     	// 快速排序
+//                new ShellSort()		// 希尔排序
+//				new CountingSort(),		// 计数排序
+//				new RadixSort()			// 基数排序
+        );
 
 
     }
