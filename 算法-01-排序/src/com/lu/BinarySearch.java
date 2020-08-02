@@ -20,12 +20,12 @@ public class BinarySearch {
         int mid = 0;
         while (begin < end) {
             mid = (begin + end) >> 1;
-            if (array[mid] == v) {
-                return mid;
-            } else if (array[mid] < v) {
+            if (array[mid] < v) {
                 begin = mid + 1;
-            } else {
+            } else if (array[mid] > v) {
                 end = mid;
+            } else {
+                return mid;
             }
         }
         return -1;
