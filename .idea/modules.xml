@@ -20,6 +20,7 @@
       <module fileurl="file://$PROJECT_DIR$/ThinkingInJava/ThinkingInJava.iml" filepath="$PROJECT_DIR$/ThinkingInJava/ThinkingInJava.iml" />
       <module fileurl="file://$PROJECT_DIR$/juc/juc.iml" filepath="$PROJECT_DIR$/juc/juc.iml" />
       <module fileurl="file://$PROJECT_DIR$/算法-01-排序/算法-01-排序.iml" filepath="$PROJECT_DIR$/算法-01-排序/算法-01-排序.iml" />
+      <module fileurl="file://$PROJECT_DIR$/算法-14-递归/算法-14-递归.iml" filepath="$PROJECT_DIR$/算法-14-递归/算法-14-递归.iml" />
     </modules>
   </component>
 </project>
