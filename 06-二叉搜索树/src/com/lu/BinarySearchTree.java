@@ -199,8 +199,9 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 
     /**
      * 获取一个节点的后继节点
-     * @param node
-     * @return
+     *
+     * @param node 节点
+     * @return {@link Node}<{@link E}>
      */
     private Node<E> successor(Node<E> node) {
         if (node == null) {
@@ -226,8 +227,9 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 
     /**
      * 判断一棵树是否是完全二叉树
-     * @param node
-     * @return
+     *
+     * @param node 节点
+     * @return boolean
      */
     private boolean isComplete(Node<E> node) {
         Queue<Node<E>> queue = new LinkedList<>();
@@ -258,7 +260,8 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 
     /**
      * 获取树的高度
-     * @return
+     *
+     * @return int
      */
     public int height() {
         return heightLevel(root);
@@ -266,8 +269,9 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 
     /**
      * 每当一层遍历完 队列的size就是下一层元素的个数
-     * @param node
-     * @return
+     *
+     * @param node 节点
+     * @return int
      */
     private int heightLevel(Node<E> node) {
 
@@ -329,7 +333,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
             Node<E> newNode = new Node<>(element, parent);
             if (cmp > 0) {
                 parent.left = newNode;
-            } else if (cmp < 0) {
+            } else {
                 parent.right = newNode;
             }
         }
@@ -358,7 +362,8 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 
     /**
      * 中序遍历
-     * @param visitor
+     *
+     * @param visitor visitor
      */
     public void inOrderTraversal(Visitor<E> visitor) {
         inOrderTraversal(root, visitor);
@@ -400,15 +405,10 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 
     public void levelOrderTraversal(Visitor<E> visitor) {
         //利用队列特性,先进先出
-        levelOrderTraversal(root, visitor);
-    }
-
-    private void levelOrderTraversal(Node<E> node, Visitor<E> visitor) {
-        //利用队列特性,先进先出
         Queue<Node<E>> queue = new LinkedList<>();
         queue.offer(root);
         while (queue.peek() != null) {
-            node = queue.poll();
+            Node<E> node = queue.poll();
             visitor.visitor(node.element);
             if (node.left != null) {
                 queue.offer(node.left);
@@ -419,17 +419,13 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         }
     }
 
-    public void levelOrderTraversal() {
-        //利用队列特性,先进先出
-        levelOrderTraversal(root);
-    }
 
-    private void levelOrderTraversal(Node<E> node) {
+    public void levelOrderTraversal() {
         //利用队列特性,先进先出
         Queue<Node<E>> queue = new LinkedList<>();
         queue.offer(root);
         while (queue.peek() != null) {
-            node = queue.poll();
+            Node<E> node = queue.poll();
             System.out.println(node.element);
             if (node.left != null) {
                 queue.offer(node.left);
