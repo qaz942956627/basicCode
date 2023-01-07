@@ -94,7 +94,9 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
             Node<E> predecessor = predecessor(node);
             //用前驱节点的值替换当前节点的值
             node.element = predecessor.element;
-            //删除前驱节点
+            //度为2的节点的前驱结点度一定为0或者1
+            // 所以可以在这直接把当前节点设置为前驱节点
+            // 后边的代码是处理删除度为0和1的
             node = predecessor;
         }
 
@@ -341,11 +343,12 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     }
 
     /**
-     * 层序遍历
+     * 先序遍历
      */
     public void preOrderTraversal() {
         preOrderTraversal(root);
     }
+
     /**
      * 先序遍历
      */
@@ -369,6 +372,9 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         inOrderTraversal(root, visitor);
     }
 
+    /**
+     * 后序遍历
+     */
     public void postOrderTraversal() {
         postOrderTraversal(root);
     }
@@ -380,6 +386,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     /**
      * 用户自定义遍历规则
      * 要求每次开始使用之前必须要把stop重置为false
+     *
      * @param <E>
      */
     public static class Visitor<E> {
@@ -388,7 +395,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         private final Predicate<E> predicate;
 
         public Visitor(Predicate<E> predicate) {
-            this.predicate =  predicate;
+            this.predicate = predicate;
         }
 
         /**
@@ -488,7 +495,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     }
 
     private void preOrderTraversal(Node<E> node, Visitor<E> visitor) {
-        if (node == null||visitor.stop) {
+        if (node == null || visitor.stop) {
             return;
         }
         visitor.stop = visitor.visitor(node.element);

@@ -77,10 +77,7 @@ class BinarySearchTreeTest {
         BinaryTrees.println(binarySearchTree);
         Predicate<Integer> predicate = (element) -> {
             System.out.print("_" + element);
-            if (element == 3) {
-                return true;
-            }
-            return false;
+            return element == 3;
         };
         BinarySearchTree.Visitor<Integer> visitor = new BinarySearchTree.Visitor<>(predicate);
         binarySearchTree.preOrderTraversal(visitor);
