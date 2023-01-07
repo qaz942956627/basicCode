@@ -5,9 +5,7 @@ import com.lu.printer.BinaryTreeInfo;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 /**
  * @author 小卢
@@ -19,7 +17,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 
     private Node<E> root;
 
-    private Comparator<E> comparator;
+    private final Comparator<E> comparator;
 
     public BinarySearchTree() {
         this(null);
@@ -104,7 +102,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         Node<E> parent = node.parent;
         Node<E> children = node.left != null ? node.left : node.right;
 
-        /**
+        /*
          * parent   爷爷
          * node     儿子
          * child    孙子
@@ -170,8 +168,9 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 
     /**
      * 获取一个节点的前驱节点
-     * @param node
-     * @return
+     *
+     * @param node 节点
+     * @return {@link Node}<{@link E}>
      */
     private Node<E> predecessor(Node<E> node) {
         //如果传进来的是null,则必然没有什么前驱节点
@@ -346,7 +345,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     /**
      * 先序遍历
      */
-    public void preOrderTraversal(Visitor visitor) {
+    public void preOrderTraversal(Visitor<E> visitor) {
         preOrderTraversal(root, visitor);
     }
 
@@ -361,7 +360,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
      * 中序遍历
      * @param visitor
      */
-    public void inOrderTraversal(Visitor visitor) {
+    public void inOrderTraversal(Visitor<E> visitor) {
         inOrderTraversal(root, visitor);
     }
 
@@ -369,7 +368,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         postOrderTraversal(root);
     }
 
-    public void postOrderTraversal(Visitor visitor) {
+    public void postOrderTraversal(Visitor<E> visitor) {
         postOrderTraversal(root, visitor);
     }
 
@@ -389,7 +388,9 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 
         /**
          * 使用者可以自定义遍历输出规则
-         * @param element
+         *
+         * @param element 元素
+         * @return boolean
          */
         public boolean visitor(E element) {
             return this.predicate.test(element);
@@ -502,10 +503,11 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     /**
      * 两个元素相比较e1大于e2返回一个正数 小于返回一个负数 等于返回0;
      *
-     * @param e1
-     * @param e2
-     * @return
+     * @param e1 e1
+     * @param e2 e2
+     * @return int
      */
+    @SuppressWarnings("unchecked")
     private int compareTo(E e1, E e2) {
         //如果有人通过有参构造传入了比较器,那么优先使用比较器
         if (comparator != null) {
