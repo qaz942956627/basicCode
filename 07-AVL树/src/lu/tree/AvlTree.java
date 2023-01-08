@@ -233,6 +233,11 @@ public class AvlTree<E> extends BinarySearchTree<E> {
             return Math.max(leftBalance,rightBalance) + 1;
         }
 
+        /**
+         * 高度更大的子节点
+         *
+         * @return {@link Node}<{@link E}>
+         */
         public Node<E> tallerChild() {
             int leftHeight = left == null ? 0 : ((AvlNode<E>) left).height;
             int rightHeight = right == null ? 0 : ((AvlNode<E>) right).height;
