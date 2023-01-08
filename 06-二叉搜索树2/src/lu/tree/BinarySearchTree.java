@@ -6,9 +6,9 @@ import java.util.Comparator;
 /**
  * @author 小卢
  */
-public class BinarySearchTree<E> extends BinaryTree<E> {
+public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 
-    private Comparator<E> comparator;
+    private final Comparator<E> comparator;
 
     public BinarySearchTree() {
         this(null);
@@ -41,7 +41,7 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
         Node<E> parent = node.parent;
         Node<E> children = node.left != null ? node.left : node.right;
 
-        /**
+        /*
          * parent   爷爷
          * node     儿子
          * child    孙子
@@ -122,7 +122,7 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
             Node<E> newNode = new Node<>(element, parent);
             if (cmp > 0) {
                 parent.left = newNode;
-            } else if (cmp < 0) {
+            } else {
                 parent.right = newNode;
             }
         }
@@ -136,9 +136,9 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
     /**
      * 两个元素相比较e1大于e2返回一个正数 小于返回一个负数 等于返回0;
      *
-     * @param e1
-     * @param e2
-     * @return
+     * @param e1 e1
+     * @param e2 e2
+     * @return int
      */
     private int compareTo(E e1, E e2) {
         //如果有人通过有参构造传入了比较器,那么优先使用比较器
@@ -146,7 +146,7 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
             return comparator.compare(e1, e2);
         }
         //如果直接通过无参构造创建的element,那么二叉树要求传入的对象必须实现comparable接口来做到可比较
-        return ((Comparable<E>) e1).compareTo(e2);
+        return (e1).compareTo(e2);
     }
 
     private void elementNotNullCheck(E element) {

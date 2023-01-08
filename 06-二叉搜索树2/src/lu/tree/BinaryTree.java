@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 /**
  * @author 小卢
  */
-public class BinaryTree<E> implements BinaryTreeInfo {
+public class BinaryTree<E extends Comparable<E>> implements BinaryTreeInfo {
 
 
     protected int size;
@@ -76,8 +76,9 @@ public class BinaryTree<E> implements BinaryTreeInfo {
 
     /**
      * 获取一个节点的前驱节点
-     * @param node
-     * @return
+     *
+     * @param node 节点
+     * @return {@link Node}<{@link E}>
      */
     protected Node<E> predecessor(Node<E> node) {
         //如果传进来的是null,则必然没有什么前驱节点
@@ -106,8 +107,9 @@ public class BinaryTree<E> implements BinaryTreeInfo {
 
     /**
      * 获取一个节点的后继节点
-     * @param node
-     * @return
+     *
+     * @param node 节点
+     * @return {@link Node}<{@link E}>
      */
     protected Node<E> successor(Node<E> node) {
         if (node == null) {
@@ -133,8 +135,9 @@ public class BinaryTree<E> implements BinaryTreeInfo {
 
     /**
      * 判断一棵树是否是完全二叉树
-     * @param node
-     * @return
+     *
+     * @param node 节点
+     * @return boolean
      */
     private boolean isComplete(Node<E> node) {
         Queue<Node<E>> queue = new LinkedList<>();
@@ -165,7 +168,8 @@ public class BinaryTree<E> implements BinaryTreeInfo {
 
     /**
      * 获取树的高度
-     * @return
+     *
+     * @return int
      */
     public int height() {
         return heightLevel(root);
@@ -173,8 +177,9 @@ public class BinaryTree<E> implements BinaryTreeInfo {
 
     /**
      * 每当一层遍历完 队列的size就是下一层元素的个数
-     * @param node
-     * @return
+     *
+     * @param node 节点
+     * @return int
      */
     private int heightLevel(Node<E> node) {
 
@@ -220,7 +225,7 @@ public class BinaryTree<E> implements BinaryTreeInfo {
     /**
      * 先序遍历
      */
-    public void preOrderTraversal(Visitor visitor) {
+    public void preOrderTraversal(Visitor<E> visitor) {
         preOrderTraversal(root, visitor);
     }
 
@@ -233,9 +238,10 @@ public class BinaryTree<E> implements BinaryTreeInfo {
 
     /**
      * 中序遍历
-     * @param visitor
+     *
+     * @param visitor visitor
      */
-    public void inOrderTraversal(Visitor visitor) {
+    public void inOrderTraversal(Visitor<E> visitor) {
         inOrderTraversal(root, visitor);
     }
 
@@ -243,7 +249,7 @@ public class BinaryTree<E> implements BinaryTreeInfo {
         postOrderTraversal(root);
     }
 
-    public void postOrderTraversal(Visitor visitor) {
+    public void postOrderTraversal(Visitor<E> visitor) {
         postOrderTraversal(root, visitor);
     }
 
@@ -263,7 +269,9 @@ public class BinaryTree<E> implements BinaryTreeInfo {
 
         /**
          * 使用者可以自定义遍历输出规则
-         * @param element
+         *
+         * @param element 元素
+         * @return boolean
          */
         public boolean visitor(E element) {
             return this.predicate.test(element);
@@ -273,15 +281,10 @@ public class BinaryTree<E> implements BinaryTreeInfo {
 
     public void levelOrderTraversal(Visitor<E> visitor) {
         //利用队列特性,先进先出
-        levelOrderTraversal(root, visitor);
-    }
-
-    private void levelOrderTraversal(Node<E> node, Visitor<E> visitor) {
-        //利用队列特性,先进先出
         Queue<Node<E>> queue = new LinkedList<>();
         queue.offer(root);
         while (queue.peek() != null) {
-            node = queue.poll();
+            Node<E> node = queue.poll();
             visitor.visitor(node.element);
             if (node.left != null) {
                 queue.offer(node.left);
@@ -292,17 +295,13 @@ public class BinaryTree<E> implements BinaryTreeInfo {
         }
     }
 
-    public void levelOrderTraversal() {
-        //利用队列特性,先进先出
-        levelOrderTraversal(root);
-    }
 
-    private void levelOrderTraversal(Node<E> node) {
+    public void levelOrderTraversal() {
         //利用队列特性,先进先出
         Queue<Node<E>> queue = new LinkedList<>();
         queue.offer(root);
         while (queue.peek() != null) {
-            node = queue.poll();
+            Node<E> node = queue.poll();
             System.out.println(node.element);
             if (node.left != null) {
                 queue.offer(node.left);
