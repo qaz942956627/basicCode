@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 /**
  * @author 小卢
  */
-public class BinaryTree<E extends Comparable<E>> implements BinaryTreeInfo {
+public class BinaryTree<E> implements BinaryTreeInfo {
 
 
     protected int size;
