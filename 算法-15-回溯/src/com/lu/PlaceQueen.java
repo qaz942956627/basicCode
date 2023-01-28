@@ -10,7 +10,7 @@ public class PlaceQueen {
 
     public static void main(String[] args) {
         PlaceQueen placeQueen = new PlaceQueen();
-        int i = placeQueen.placeQueen(4);
+        int i = placeQueen.placeQueen(8);
         System.out.printf("有%s中解法%n", i);
     }
 
